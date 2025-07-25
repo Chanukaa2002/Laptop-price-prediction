@@ -14,7 +14,7 @@ def prediction(lst):
 
 @app.route("/",methods=['POST','GET'])
 def index():
-    pred=0;
+    pred_value=0;
     if request.method =='POST':
         ram = request.form['ram']
         weight = request.form['weight']
