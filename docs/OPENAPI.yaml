@@ -1,0 +1,62 @@
+openapi: 3.1.0
+info:
+  title: Laptop Price Predictor
+  version: 1.0.0
+  description: HTML form-based API for predicting laptop prices.
+servers:
+  - url: http://127.0.0.1:5000
+paths:
+  /:
+    get:
+      summary: Render prediction form
+      responses:
+        '200':
+          description: HTML form
+          content:
+            text/html:
+              schema:
+                type: string
+    post:
+      summary: Submit specs to get predicted price (HTML response)
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                ram:
+                  type: string
+                  example: '16'
+                weight:
+                  type: string
+                  example: '1.5'
+                company:
+                  type: string
+                  enum: [acer, apple, asus, dell, hp, lenovo, msi, toshiba, other]
+                typename:
+                  type: string
+                  enum: [2in1convertible, gaming, netbook, notebook, ultrabook, workstation]
+                opsys:
+                  type: string
+                  enum: [windows, mac, linux, other]
+                cpuname:
+                  type: string
+                  enum: [intelcorei3, intelcorei5, intelcorei7, amd, other]
+                gpuname:
+                  type: string
+                  enum: [intel, amd, nvidia]
+                touchscreen:
+                  type: string
+                  description: Optional checkbox value when selected
+                ips:
+                  type: string
+                  description: Optional checkbox value when selected
+              required: [ram, weight, company, typename, opsys, cpuname, gpuname]
+      responses:
+        '200':
+          description: HTML page showing predicted price
+          content:
+            text/html:
+              schema:
+                type: string
